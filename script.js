@@ -1,6 +1,6 @@
 // its make a favourites meal array if its not exist in local storage
-if (localStorage.getItem("favourites") == null) {
-    localStorage.setItem("favourites", JSON.stringify([]));
+if (localStorage.getItem("favouritesList") == null) {
+    localStorage.setItem("favouritesList", JSON.stringify([]));
 }
 
 // its fetch meals from api and return it
@@ -15,7 +15,7 @@ async function fetchMealsFromApi(url,value) {
 // its show's all meals card in main acording to search input value
 function showMealList(){
     let inputValue = document.getElementById("my-search").value;
-    let arr=JSON.parse(localStorage.getItem("favourites"));
+    let arr=JSON.parse(localStorage.getItem("favouritesList"));
     let url="https://www.themealdb.com/api/json/v1/1/search.php?s=";
     let html = "";
     let meals=fetchMealsFromApi(url,inputValue);
@@ -113,10 +113,12 @@ async function showMealDetails(id) {
 
 // its shows all favourites meals in favourites body
 async function showFavMealList() {
-    let arr=JSON.parse(localStorage.getItem("favourites"));
+    let arr=JSON.parse(localStorage.getItem("favouritesList"));
     let url="https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
     let html="";
+    console.log(arr);
     if (arr.length==0) {
+        console.log("hi");
         html += `
             <div class="page-wrap d-flex flex-row align-items-center">
                 <div class="container">
@@ -159,7 +161,7 @@ async function showFavMealList() {
 
 //its adds and remove meals to favourites list
 function addRemoveToFavList(id) {
-    let arr=JSON.parse(localStorage.getItem("favourites"));
+    let arr=JSON.parse(localStorage.getItem("favouritesList"));
     let contain=false;
     for (let index = 0; index < arr.length; index++) {
         if (id==arr[index]) {
@@ -174,7 +176,7 @@ function addRemoveToFavList(id) {
         arr.push(id);
         alert("your meal add your favourites list");
     }
-    localStorage.setItem("favourites",JSON.stringify(arr));
+    localStorage.setItem("favouritesList",JSON.stringify(arr));
     showMealList();
     showFavMealList();
 }
