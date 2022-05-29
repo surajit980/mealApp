@@ -116,7 +116,7 @@ async function showFavMealList() {
     let arr=JSON.parse(localStorage.getItem("favourites"));
     let url="https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
     let html="";
-    if (arr==null) {
+    if (arr.length==0) {
         html += `
             <div class="page-wrap d-flex flex-row align-items-center">
                 <div class="container">
